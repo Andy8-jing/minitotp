@@ -1,0 +1,15 @@
+{
+  "name": "wxtotp-demo-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WxTOTP 演示站点（Node.js 后端 + 静态页面）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.0",
+    "qrcode-svg": "^1.1.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "wxtotp-sdk",
+  "version": "0.1.0",
+  "description": "TOTP (RFC6238) 后端 SDK：生成密钥、otpauth URI、二维码、校验验证码",
+  "main": "wxtotp.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": ["totp", "2fa", "otpauth", "rfc6238"],
+  "license": "MIT",
+  "dependencies": {
+    "qrcode-svg": "^1.1.0"
+  }
+}

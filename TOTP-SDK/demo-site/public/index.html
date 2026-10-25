@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WxTOTP 接入演示</title>
+  <style>
+    body { font-family: -apple-system, "PingFang SC", sans-serif; max-width: 520px; margin: 40px auto; padding: 0 20px; color: #1f2329; }
+    h1 { font-size: 22px; }
+    .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    button { background: #2563eb; color: #fff; border: 0; border-radius: 8px; padding: 12px 20px; font-size: 14px; cursor: pointer; }
+    button:hover { opacity: .9; }
+    input { width: 100%; box-sizing: border-box; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 20px; letter-spacing: 6px; text-align: center; }
+    .svg-wrap { text-align: center; }
+    .secret { font-family: monospace; word-break: break-all; background: #f3f4f6; padding: 8px; border-radius: 6px; font-size: 13px; }
+    .result { margin-top: 12px; font-weight: 600; }
+    .ok { color: #16a34a; }
+    .fail { color: #dc2626; }
+  </style>
+</head>
+<body>
+  <h1>WxTOTP 接入演示</h1>
+
+  <div class="card">
+    <h3>① 开启二次验证</h3>
+    <button onclick="bindStart()">生成绑定二维码</button>
+    <div id="bindBox" style="display:none">
+      <div class="svg-wrap" id="qrcode"></div>
+      <p>用 <b>WxTOTP 小程序</b> 或任意标准 TOTP 验证器扫码绑定。</p>
+      <p>密钥（请备份）：<div class="secret" id="secret"></div></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>② 输入动态验证码</h3>
+    <input id="code" maxlength="6" placeholder="6 位验证码" inputmode="numeric" />
+    <div style="margin-top:12px"><button onclick="verify()">校验</button></div>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    async function bindStart() {
+      const r = await fetch('/api/bind-start');
+      const data = await r.json();
+      document.getElementById('bindBox').style.display = 'block';
+      document.getElementById('qrcode').innerHTML = data.svg;
+      document.getElementById('secret').textContent = data.secret;
+    }
+    async function verify() {
+      const code = document.getElementById('code').value.trim();
+      const r = await fetch('/api/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code })
+      });
+      const data = await r.json();
+      const el = document.getElementById('result');
+      el.textContent = data.msg;
+      el.className = 'result ' + (data.success ? 'ok' : 'fail');
+    }
+  </script>
+</body>
+</html>
