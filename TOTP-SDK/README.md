@@ -1,9 +1,9 @@
-# TOTP-SDK
+# minitotp — TOTP 二次验证 SDK
 
-> WxTOTP 的后端 SDK：多语言实现（Python / Go / Node.js）+ Demo 站点
+> **minitotp** 标准 TOTP 后端 SDK：多语言实现（Python / Go / Node.js）+ Demo 站点
 > MIT License | RFC4226 / RFC6238 | 兼容 otpauth:// 协议
 
-供业务网站集成：生成密钥、生成 otpauth 二维码、校验 6 位动态验证码。用户端配套使用微信小程序 [WxTOTP](../WxTOTP)（也可用任意标准 TOTP 验证器）。
+供业务网站集成：生成密钥、生成 otpauth 二维码、校验 6 位动态验证码。用户端配套使用微信小程序 WxTOTP 验证器（也可用任意标准 TOTP 验证器）。
 
 ## 目录结构
 

@@ -1,8 +1,8 @@
 <div align="center">
 
-# WxTOTP
+# minitotp
 
-**标准 TOTP（RFC6238）后端 SDK · 多语言实现（Python / Go / Node.js）· 替代短信验证码**
+**标准 TOTP（RFC6238）二次验证 SDK · Python / Go / Node.js · 替代短信验证码**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![RFC6238](https://img.shields.io/badge/标准-RFC6238%2F4226-orange.svg)](https://datatracker.ietf.org/doc/html/rfc6238)
@@ -16,14 +16,14 @@
 
 ## 这是什么
 
-面向**业务网站开发者**的标准 TOTP 二次验证 SDK：在你的注册/登录系统中生成密钥、生成 otpauth 二维码、校验 6 位动态验证码。
+**minitotp** 是面向**业务网站开发者**的标准 TOTP 二次验证 SDK：在你的注册/登录系统中生成密钥、生成 otpauth 二维码、校验 6 位动态验证码。多语言实现，算法与官方 RFC 测试向量完全对齐。
 
-配套的 **WxTOTP 微信小程序验证器**由运营方提供（闭源），业务方接入本 SDK 后，可引导用户使用该验证器；用户也可自由选用任意标准 TOTP 验证器（微软验证器 / Authy / Google Authenticator）。
+配套的 **WxTOTP 微信小程序验证器**由运营方提供（闭源）。业务方接入 minitotp 后，可引导用户使用该验证器；用户也可自由选用任意标准 TOTP 验证器（微软验证器 / Authy / Google Authenticator）。
 
 ## 目录结构
 
 ```
-TOTP-SDK/                  # 开源部分（本仓库）
+TOTP-SDK/                  # 本仓库
 ├── sdk/
 │   ├── python/            # 纯标准库实现
 │   ├── go/                # Go 实现 + 测试
@@ -33,8 +33,6 @@ TOTP-SDK/                  # 开源部分（本仓库）
 │   └── integrate.md       # 第三方业务接入文档
 └── LICENSE                # MIT
 ```
-
-> WxTOTP 微信小程序验证器为私有运营产品，源码不在此开源仓库。
 
 ## 特性
 
@@ -50,7 +48,7 @@ cd sdk/nodejs && npm install && node test.js
 ```
 
 ```js
-const totp = require("wxtotp-sdk");
+const totp = require("minitotp");
 const secret = totp.generateSecret(160);                       // 生成 base32 密钥
 const uri = totp.buildOtpauthUri("MySite", "user@example.com", secret); // otpauth URI
 const ok = totp.verifyCode(inputCode, secret, 1);              // 校验 6 位验证码

@@ -1,7 +1,7 @@
-# WxTOTP 第三方业务接入文档
+# minitotp 第三方业务接入文档
 
-> 面向业务网站开发者：如何在你的注册/登录系统中接入 WxTOTP（标准 TOTP 二次验证）。
-> 用户端可用 WxTOTP 微信小程序，也可用任意标准 TOTP 验证器（微软验证器 / Authy / Google Authenticator）。
+> 面向业务网站开发者：如何在你的注册/登录系统中接入 **minitotp**（标准 TOTP 二次验证 SDK）。
+> 用户端可用 WxTOTP 微信小程序验证器，也可用任意标准 TOTP 验证器（微软验证器 / Authy / Google Authenticator）。
 
 ## 1. 接入前提
 
