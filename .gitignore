@@ -16,3 +16,6 @@ build/
 # 环境变量（勿提交真实密钥）
 .env
 .env.local
+
+# 私有运营产品：WxTOTP 微信小程序（源码与文档不进入开源仓库）
+WxTOTP/
