@@ -2,12 +2,12 @@
 
 # minitotp
 
-**标准 TOTP（RFC6238）二次验证 SDK · Python / Go / Node.js · 替代短信验证码**
+**Standard TOTP (RFC6238) 2FA SDK · Python / Go / Node.js · Replace SMS verification codes**
 
-[English](./README.en.md) · 简体中文
+English · [简体中文](./README.zh-CN.md)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
-[![RFC6238](https://img.shields.io/badge/标准-RFC6238%2F4226-orange.svg)](https://datatracker.ietf.org/doc/html/rfc6238)
+[![RFC6238](https://img.shields.io/badge/Standard-RFC6238%2F4226-orange.svg)](https://datatracker.ietf.org/doc/html/rfc6238)
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](./TOTP-SDK/sdk/python)
 [![Go](https://img.shields.io/badge/Go-1.18+-00ADD8?logo=go&logoColor=white)](./TOTP-SDK/sdk/go)
 [![Node.js](https://img.shields.io/badge/Node.js-16+-339933?logo=node.js&logoColor=white)](./TOTP-SDK/sdk/nodejs)
@@ -16,34 +16,34 @@
 
 ---
 
-## 这是什么
+## What is this?
 
-**minitotp** 是面向**业务网站开发者**的标准 TOTP 二次验证 SDK：在你的注册/登录系统中生成密钥、生成 otpauth 二维码、校验 6 位动态验证码。多语言实现，算法与官方 RFC 测试向量完全对齐。
+**minitotp** is a standard TOTP two-factor authentication SDK for **web service developers**: generate secrets, build otpauth QR codes, and verify 6-digit dynamic codes in your sign-up/login system. Multi-language implementations, with algorithms fully aligned to the official RFC test vectors.
 
-配套的 **WxTOTP 微信小程序验证器**由运营方提供（闭源）。业务方接入 minitotp 后，可引导用户使用该验证器；用户也可自由选用任意标准 TOTP 验证器（微软验证器 / Authy / Google Authenticator）。
+A companion **WxTOTP WeChat Mini Program authenticator** is provided by the operator (closed source). After integrating minitotp, you can guide users to use this authenticator; users are also free to use any standard TOTP authenticator (Microsoft Authenticator / Authy / Google Authenticator).
 
-## 目录结构
+## Directory structure
 
 ```
-TOTP-SDK/                  # 本仓库
+TOTP-SDK/                  # This repository
 ├── sdk/
-│   ├── python/            # 纯标准库实现
-│   ├── go/                # Go 实现 + 测试
-│   └── nodejs/            # Node.js 实现 + 测试
-├── demo-site/             # express 演示站点（绑定 + 校验闭环）
+│   ├── python/            # Pure standard-library implementation
+│   ├── go/                # Go implementation + tests
+│   └── nodejs/            # Node.js implementation + tests
+├── demo-site/             # Express demo site (bind + verify flow)
 ├── docs/
-│   └── integrate.md       # 第三方业务接入文档
+│   └── integrate.md       # Third-party integration guide
 └── LICENSE                # MIT
 ```
 
-## 特性
+## Features
 
-✅ **标准协议**：RFC4226(HOTP) / RFC6238(TOTP)、otpauth://，与所有标准验证器互通
-✅ **多端一致**：三语言 SDK 算法对齐，全部通过 RFC6238 官方向量
-✅ **加密安全**：密钥用操作系统 CSPRNG 生成，不存任何数据，存储交由业务方
-✅ **轻量无依赖**：Python/Go 核心零三方依赖
+✅ **Standard protocol**: RFC4226 (HOTP) / RFC6238 (TOTP), otpauth:// — interoperable with all standard authenticators
+✅ **Cross-language consistency**: all three SDK implementations are aligned and pass the RFC6238 official vectors
+✅ **Cryptographically secure**: secrets generated with OS CSPRNG; SDK stores nothing — storage is the business party's responsibility
+✅ **Lightweight & dependency-free**: Python/Go core has zero third-party dependencies
 
-## 快速开始（Node.js）
+## Quick start (Node.js)
 
 ```bash
 cd sdk/nodejs && npm install && node test.js
@@ -51,34 +51,34 @@ cd sdk/nodejs && npm install && node test.js
 
 ```js
 const totp = require("minitotp");
-const secret = totp.generateSecret(160);                       // 生成 base32 密钥
-const uri = totp.buildOtpauthUri("MySite", "user@example.com", secret); // otpauth URI
-const ok = totp.verifyCode(inputCode, secret, 1);              // 校验 6 位验证码
+const secret = totp.generateSecret(160);                       // generate a base32 secret
+const uri = totp.buildOtpauthUri("MySite", "user@example.com", secret); // build otpauth URI
+const ok = totp.verifyCode(inputCode, secret, 1);              // verify the 6-digit code
 ```
 
-## 接入步骤
+## Integration steps
 
-1. 用户开启 2FA：后端 `generateSecret()` 生成密钥 + `buildOtpauthUri()` 生成二维码
-2. 用户用 WxTOTP 小程序（或任意标准验证器）扫码绑定
-3. 登录时用户提交 6 位验证码，后端 `verifyCode()` 校验
+1. User enables 2FA: backend calls `generateSecret()` + `buildOtpauthUri()` to create the QR code
+2. User scans it with the WxTOTP Mini Program (or any standard authenticator) to bind
+3. At login, user submits a 6-digit code and the backend verifies it with `verifyCode()`
 
-> 完整接入见 [`TOTP-SDK/docs/integrate.md`](./TOTP-SDK/docs/integrate.md)
+> Full integration guide: [`TOTP-SDK/docs/integrate.md`](./TOTP-SDK/docs/integrate.md)
 
-## 安全声明
+## Security notice
 
-> ⚠️ TOTP 存在钓鱼风险：仿站拿到 30s 内的 6 位验证码即可登录。
-> 本项目**不是防钓鱼方案**，不能替代 FIDO2 / WebAuthn(Passkey)。高安全场景请使用 FIDO2。
-> secret 是凭证根，业务方必须加密存储。
+> ⚠️ TOTP is vulnerable to phishing: an attacker can log in with a 6-digit code captured within 30 seconds.
+> This project is **not an anti-phishing solution** and cannot replace FIDO2 / WebAuthn (Passkey). Use FIDO2 for high-security scenarios.
+> The secret is the root of the credential — the business party must store it encrypted.
 
-## 测试向量（RFC6238）
+## Test vectors (RFC6238)
 
 ```
 Secret: 12345678901234567890
-T = 59           → "94287082"   (8位)
-T = 1111111109   → "07081804"   (8位)
-T = 2000000000   → "69279037"   (8位)
+T = 59           → "94287082"   (8 digits)
+T = 1111111109   → "07081804"   (8 digits)
+T = 2000000000   → "69279037"   (8 digits)
 ```
 
-## 协议
+## License
 
 [MIT License](./LICENSE)
