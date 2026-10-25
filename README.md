@@ -4,6 +4,8 @@
 
 **标准 TOTP（RFC6238）二次验证 SDK · Python / Go / Node.js · 替代短信验证码**
 
+[English](./README.en.md) · 简体中文
+
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![RFC6238](https://img.shields.io/badge/标准-RFC6238%2F4226-orange.svg)](https://datatracker.ietf.org/doc/html/rfc6238)
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](./TOTP-SDK/sdk/python)
