@@ -22,6 +22,14 @@ English · [简体中文](./README.zh-CN.md)
 
 A companion **WxTOTP WeChat Mini Program authenticator** is provided by the operator (closed source). After integrating minitotp, you can guide users to use this authenticator; users are also free to use any standard TOTP authenticator (Microsoft Authenticator / Authy / Google Authenticator).
 
+## 🚀 Live Demo
+
+**Try it online — pure front-end, no server needed:** generate a binding QR code, watch the real-time 6-digit code, and verify it, all in your browser.
+
+👉 **[Open the Live Demo](https://Andy8-jing.github.io/minitotp/)**
+
+Scan the demo QR with the **Mina令牌 (WxTOTP) Mini Program** to bind & verify. Your own project can also use this Mini Program for 2FA — scan, bind, and it works offline.
+
 ## Directory structure
 
 ```
