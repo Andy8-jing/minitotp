@@ -79,6 +79,26 @@ uri = build_otpauth_uri("MySite", "user@example.com", secret)  # build otpauth U
 ok = verify_code(input_code, secret, 1)                        # verify the 6-digit code
 ```
 
+### End-to-end example (copy & run)
+
+A self-contained flow covering **backend → authenticator/front-end → backend**. Copy it, `pip install minitotp`, and run:
+
+```python
+from minitotp import generate_secret, build_otpauth_uri, calc_totp, verify_code
+
+# ① Backend: enable 2FA for a user → secret + otpauth URI (turn the URI into a QR for them to scan)
+secret = generate_secret()
+uri = build_otpauth_uri("MySite", "user@example.com", secret)
+print("Binding URI:", uri)
+
+# ② Authenticator / front-end: after the user scans & binds, compute the current 6-digit code
+code = calc_totp(secret)
+print("Authenticator shows:", code)
+
+# ③ Backend: verify the code the user submits at login
+print("Backend verify:", "PASS" if verify_code(code, secret) else "FAIL")
+```
+
 ## Integration steps
 
 1. User enables 2FA: backend calls `generateSecret()` + `buildOtpauthUri()` to create the QR code
