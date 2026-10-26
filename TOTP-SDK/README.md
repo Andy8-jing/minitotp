@@ -86,6 +86,26 @@ ok = verify_code("123456", secret)
 ```
 > 注：`generate_qr_svg` 需要可选依赖 `qrcode[pil]`（`pip install minitotp[qr]`）；核心算法只用标准库。测试：`cd sdk/python && python3 test.py`
 
+#### 端到端示例（后端 → 前端 → 后端，复制即用）
+
+覆盖「后端生成绑定 → 验证器/前端计算动态码 → 后端校验」全链路，`pip install minitotp` 后直接运行：
+
+```python
+from minitotp import generate_secret, build_otpauth_uri, calc_totp, verify_code
+
+# ① 后端：开启 2FA，生成密钥 + otpauth URI（转二维码给用户扫）
+secret = generate_secret()
+uri = build_otpauth_uri("MySite", "user@example.com", secret)
+print("绑定 URI:", uri)
+
+# ② 验证器 / 前端：扫码绑定后用同一 secret 计算当前 6 位码
+code = calc_totp(secret)
+print("验证器显示:", code)
+
+# ③ 后端：登录时校验用户提交的 6 位码
+print("后端校验:", "通过 ✓" if verify_code(code, secret) else "失败 ✗")
+```
+
 ### Go
 ```bash
 cd sdk/go
