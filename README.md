@@ -29,7 +29,7 @@ English · [简体中文](./README.zh-CN.md)
 | ❌ 可被 SIM 卡劫持 / 短信拦截 | ✅ **不经过短信通道**，更安全 |
 | ❌ 需要收集手机号 | ✅ **无需手机号**，保护隐私 |
 
-A companion **WeChat Mini Program: Mina令牌** (a standard TOTP authenticator) is provided by the operator (closed source). After integrating minitotp, you can guide users to use this Mini Program; users are also free to use any standard TOTP authenticator (Microsoft Authenticator / Authy / Google Authenticator).
+A companion **WeChat Mini Program: Mina令牌** (a standard TOTP authenticator). After integrating minitotp, you can guide users to use this Mini Program; users are also free to use any standard TOTP authenticator (Microsoft Authenticator / Authy / Google Authenticator).
 
 ![Mina令牌 Mini Program QR](docs/mina-miniprogram-qr.png)
 

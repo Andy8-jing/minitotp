@@ -29,7 +29,7 @@
 | ❌ 可被 SIM 卡劫持 / 短信拦截 | ✅ **不经过短信通道**，更安全 |
 | ❌ 需要收集手机号 | ✅ **无需手机号**，保护隐私 |
 
-配套的 **微信小程序：Mina令牌**（标准 TOTP 验证器）由运营方提供（闭源）。业务方接入 minitotp 后，可引导用户使用该小程序；用户也可自由选用任意标准 TOTP 验证器（微软验证器 / Authy / Google Authenticator）。
+配套的 **微信小程序：Mina令牌**（标准 TOTP 验证器）。业务方接入 minitotp 后，可引导用户使用该小程序；用户也可自由选用任意标准 TOTP 验证器（微软验证器 / Authy / Google Authenticator）。
 
 ![Mina令牌 小程序码](docs/mina-miniprogram-qr.png)
 
