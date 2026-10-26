@@ -75,16 +75,16 @@ const ok = totp.verifyCode("123456", secret);
 
 ### Python
 ```bash
-cd sdk/python
-python3 test.py        # 纯标准库，无需安装依赖
+pip install minitotp        # 发布 PyPI 后可直接安装
+# 本地开发模式：cd sdk/python && pip install -e .
 ```
 ```python
-from wxtotp import generate_secret, build_otpauth_uri, verify_code
+from minitotp import generate_secret, build_otpauth_uri, verify_code
 secret = generate_secret()
 uri = build_otpauth_uri("MySite", "user@test.com", secret)
 ok = verify_code("123456", secret)
 ```
-> 注：`generate_qr_svg` 需要 `qrcode` 库（可选）。核心算法与 test 只用标准库。
+> 注：`generate_qr_svg` 需要可选依赖 `qrcode[pil]`（`pip install minitotp[qr]`）；核心算法只用标准库。测试：`cd sdk/python && python3 test.py`
 
 ### Go
 ```bash

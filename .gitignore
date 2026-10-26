@@ -12,6 +12,7 @@ project.private.config.json
 # 构建产物
 dist/
 build/
+*.egg-info/
 
 # 环境变量（勿提交真实密钥）
 .env

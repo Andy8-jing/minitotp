@@ -4,7 +4,7 @@ import hmac
 import hashlib
 import time
 from urllib.parse import quote
-from base32 import b32decode, b32encode
+from .base32 import b32decode, b32encode
 
 
 def generate_secret(bits=160):

@@ -1,7 +1,6 @@
 # sdk/python/test.py —— RFC6238 官方测试向量
-import sys
-from base32 import b32encode, b32decode
-from wxtotp import calc_totp, verify_code
+from minitotp.base32 import b32encode, b32decode
+from minitotp import calc_totp, verify_code
 
 # RFC6238 附录 B 测试向量
 # secret 字节 = b"12345678901234567890"

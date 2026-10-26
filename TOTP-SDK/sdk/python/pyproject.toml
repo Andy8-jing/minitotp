@@ -1,0 +1,23 @@
+# sdk/python/pyproject.toml —— minitotp Python 打包配置
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "minitotp"
+version = "0.1.0"
+description = "Standard TOTP (RFC6238) two-factor authentication SDK, pure standard library"
+requires-python = ">=3.7"
+license = { text = "MIT" }
+keywords = ["totp", "2fa", "otpauth", "rfc6238", "hotp", "security"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Security",
+]
+# 可选依赖：generate_qr_svg 需要 qrcode 库
+[project.optional-dependencies]
+qr = ["qrcode[pil]"]
+
+[tool.setuptools]
+packages = ["minitotp"]
