@@ -24,6 +24,15 @@ A companion **WeChat Mini Program: Mina令牌** (a standard TOTP authenticator) 
 
 ![Mina令牌 Mini Program QR](docs/mina-miniprogram-qr.png)
 
+**The smarter replacement for SMS verification codes.** Instead of paying for and waiting on SMS OTP, minitotp generates the same 6-digit code **locally on the user's device** — no SMS gateway, works offline, and is safer:
+
+| SMS verification code | minitotp (TOTP) |
+|---|---|
+| ❌ 每条短信计费，需短信网关 | ✅ **零成本**，本地生成 |
+| ❌ 依赖运营商/信号/网络，有延迟 | ✅ **离线可用**，30s 即时出码 |
+| ❌ 可被 SIM 卡劫持 / 短信拦截 | ✅ **不经过短信通道**，更安全 |
+| ❌ 需要收集手机号 | ✅ **无需手机号**，保护隐私 |
+
 ## 🚀 Live Demo
 
 **Try it online — pure front-end, no server needed:** generate a binding QR code, watch the real-time 6-digit code, and verify it, all in your browser.
