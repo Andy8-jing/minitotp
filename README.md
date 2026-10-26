@@ -20,7 +20,9 @@ English · [简体中文](./README.zh-CN.md)
 
 **minitotp** is a standard TOTP two-factor authentication SDK for **web service developers**: generate secrets, build otpauth QR codes, and verify 6-digit dynamic codes in your sign-up/login system. Multi-language implementations, with algorithms fully aligned to the official RFC test vectors.
 
-A companion **WxTOTP WeChat Mini Program authenticator** is provided by the operator (closed source). After integrating minitotp, you can guide users to use this authenticator; users are also free to use any standard TOTP authenticator (Microsoft Authenticator / Authy / Google Authenticator).
+A companion **WeChat Mini Program: Mina令牌** (a standard TOTP authenticator) is provided by the operator (closed source). After integrating minitotp, you can guide users to use this Mini Program; users are also free to use any standard TOTP authenticator (Microsoft Authenticator / Authy / Google Authenticator).
+
+![Mina令牌 Mini Program QR](docs/mina-miniprogram-qr.png)
 
 ## 🚀 Live Demo
 
@@ -28,7 +30,7 @@ A companion **WxTOTP WeChat Mini Program authenticator** is provided by the oper
 
 👉 **[Open the Live Demo](https://Andy8-jing.github.io/minitotp/)**
 
-Scan the demo QR with the **Mina令牌 (WxTOTP) Mini Program** to bind & verify. Your own project can also use this Mini Program for 2FA — scan, bind, and it works offline.
+Scan the demo QR with the **WeChat Mini Program: Mina令牌** to bind & verify. Your own project can also use this Mini Program for 2FA — scan, bind, and it works offline.
 
 ## Directory structure
 
@@ -102,7 +104,7 @@ print("Backend verify:", "PASS" if verify_code(code, secret) else "FAIL")
 ## Integration steps
 
 1. User enables 2FA: backend calls `generateSecret()` + `buildOtpauthUri()` to create the QR code
-2. User scans it with the WxTOTP Mini Program (or any standard authenticator) to bind
+2. User scans it with the Mina令牌 Mini Program (or any standard authenticator) to bind
 3. At login, user submits a 6-digit code and the backend verifies it with `verifyCode()`
 
 > Full integration guide: [`TOTP-SDK/docs/integrate.md`](./TOTP-SDK/docs/integrate.md)

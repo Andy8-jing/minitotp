@@ -20,7 +20,9 @@
 
 **minitotp** 是面向**业务网站开发者**的标准 TOTP 二次验证 SDK：在你的注册/登录系统中生成密钥、生成 otpauth 二维码、校验 6 位动态验证码。多语言实现，算法与官方 RFC 测试向量完全对齐。
 
-配套的 **WxTOTP 微信小程序验证器**由运营方提供（闭源）。业务方接入 minitotp 后，可引导用户使用该验证器；用户也可自由选用任意标准 TOTP 验证器（微软验证器 / Authy / Google Authenticator）。
+配套的 **微信小程序：Mina令牌**（标准 TOTP 验证器）由运营方提供（闭源）。业务方接入 minitotp 后，可引导用户使用该小程序；用户也可自由选用任意标准 TOTP 验证器（微软验证器 / Authy / Google Authenticator）。
+
+![Mina令牌 小程序码](docs/mina-miniprogram-qr.png)
 
 ## 🚀 在线体验（Live Demo）
 
@@ -28,7 +30,7 @@
 
 👉 **[打开在线体验](https://Andy8-jing.github.io/minitotp/)**
 
-用 **Mina令牌 微信小程序** 扫码绑定即可体验（扫码绑定、离线出码）；你自己的项目接入本 SDK 后，同样可让用户用这个小程序完成二次验证。
+用 **微信小程序：Mina令牌** 扫码绑定即可体验（扫码绑定、离线出码）；你自己的项目接入本 SDK 后，同样可让用户用这个小程序完成二次验证。
 
 ## 目录结构
 
@@ -102,7 +104,7 @@ print("后端校验:", "通过 ✓" if verify_code(code, secret) else "失败 �
 ## 接入步骤
 
 1. 用户开启 2FA：后端 `generateSecret()` 生成密钥 + `buildOtpauthUri()` 生成二维码
-2. 用户用 WxTOTP 小程序（或任意标准验证器）扫码绑定
+2. 用户用 微信小程序：Mina令牌（或任意标准验证器）扫码绑定
 3. 登录时用户提交 6 位验证码，后端 `verifyCode()` 校验
 
 > 完整接入见 [`TOTP-SDK/docs/integrate.md`](./TOTP-SDK/docs/integrate.md)
