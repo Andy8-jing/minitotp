@@ -24,10 +24,10 @@ English · [简体中文](./README.zh-CN.md)
 
 | SMS verification code | minitotp (TOTP) |
 |---|---|
-| ❌ 每条短信计费，需短信网关 | ✅ **零成本**，本地生成 |
-| ❌ 依赖运营商/信号/网络，有延迟 | ✅ **离线可用** |
-| ❌ 可被 SIM 卡劫持 / 短信拦截 | ✅ **不经过短信通道**，更安全 |
-| ❌ 需要收集手机号 | ✅ **无需手机号**，保护隐私 |
+| ❌ Per-SMS cost, needs an SMS gateway | ✅ **Zero cost**, generated locally |
+| ❌ Depends on carrier / signal / network | ✅ **Works offline** |
+| ❌ Susceptible to SIM swap / SMS interception | ✅ **No SMS channel**, more secure |
+| ❌ Requires collecting a phone number | ✅ **No phone number**, privacy-friendly |
 
 A companion **WeChat Mini Program: Mina令牌** (a standard TOTP authenticator). After integrating minitotp, you can guide users to use this Mini Program; users are also free to use any standard TOTP authenticator (Microsoft Authenticator / Authy / Google Authenticator).
 
@@ -102,9 +102,10 @@ secret = generate_secret()
 uri = build_otpauth_uri("MySite", "user@example.com", secret)
 print("Binding URI:", uri)   # this is what the user scans with an authenticator (e.g. Mina令牌 Mini Program)
 
-# ② The authenticator (Mini Program / App) computes the 6-digit code — NOT your backend.
-#    In production the backend never runs calc_totp; it's shown below only to illustrate
-#    the code the user sees inside the authenticator.
+# ② The authenticator computes the 6-digit code — NOT your backend. In production the
+#    backend never runs calc_totp; shown below only to illustrate the code the user sees.
+#    Your users actually use the **WeChat Mini Program: Mina令牌**: after scanning the QR
+#    to bind, it shows the code automatically — no backend involved.
 from minitotp import calc_totp
 code = calc_totp(secret)
 print("Authenticator shows:", code)

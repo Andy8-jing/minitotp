@@ -104,6 +104,7 @@ print("绑定 URI:", uri)   # 用户用验证器（如 微信小程序：Mina令
 
 # ② 验证器（小程序 / App）负责计算 6 位动态码——**不是你的后端**。
 #    生产中后端绝不运行 calc_totp；下面这行仅示意"用户在小程序里看到的验证码"。
+#    你的用户实际用的是 **微信小程序：Mina令牌**：扫码绑定后，小程序自动显示动态码，无需后端参与。
 from minitotp import calc_totp
 code = calc_totp(secret)
 print("验证器显示:", code)
