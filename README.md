@@ -64,6 +64,21 @@ const uri = totp.buildOtpauthUri("MySite", "user@example.com", secret); // build
 const ok = totp.verifyCode(inputCode, secret, 1);              // verify the 6-digit code
 ```
 
+## Quick start (Python)
+
+Install from PyPI — no third-party dependencies, pure standard library:
+
+```bash
+pip install minitotp
+```
+
+```python
+from minitotp import generate_secret, build_otpauth_uri, verify_code
+secret = generate_secret()                                     # generate a base32 secret
+uri = build_otpauth_uri("MySite", "user@example.com", secret)  # build otpauth URI
+ok = verify_code(input_code, secret, 1)                        # verify the 6-digit code
+```
+
 ## Integration steps
 
 1. User enables 2FA: backend calls `generateSecret()` + `buildOtpauthUri()` to create the QR code

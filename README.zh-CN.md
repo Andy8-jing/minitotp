@@ -64,6 +64,21 @@ const uri = totp.buildOtpauthUri("MySite", "user@example.com", secret); // otpau
 const ok = totp.verifyCode(inputCode, secret, 1);              // 校验 6 位验证码
 ```
 
+## 快速开始（Python）
+
+从 PyPI 安装——纯标准库，无三方依赖：
+
+```bash
+pip install minitotp
+```
+
+```python
+from minitotp import generate_secret, build_otpauth_uri, verify_code
+secret = generate_secret()                                     # 生成 base32 密钥
+uri = build_otpauth_uri("MySite", "user@example.com", secret)  # 生成 otpauth URI
+ok = verify_code(input_code, secret, 1)                        # 校验 6 位验证码
+```
+
 ## 接入步骤
 
 1. 用户开启 2FA：后端 `generateSecret()` 生成密钥 + `buildOtpauthUri()` 生成二维码
