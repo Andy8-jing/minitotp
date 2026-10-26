@@ -92,20 +92,32 @@ ok = verify_code("123456", secret)
 
 覆盖「后端生成绑定 → 验证器/前端计算动态码 → 后端校验」全链路，`pip install minitotp` 后直接运行：
 
+**绑定流程（用户首次开启 2FA）：**
+
 ```mermaid
 flowchart TB
     subgraph S1["① 你的后端"]
         A["generate_secret() 生成密钥"] --> B["build_otpauth_uri() 生成 otpauth URI"]
+        A -.->|"加密保存 secret"| D["数据库"]
     end
     B -->|"二维码 otpauth://"| C
-    subgraph S2["② 微信小程序：Mina令牌（验证器）"]
-        C["扫码绑定 → 保存 secret"] --> D["calc_totp() 本地计算 6 位动态码"]
+    subgraph S2["② 微信小程序：Mina令牌"]
+        C["用户扫码 → 绑定成功，本地保存 secret"]
     end
-    D -->|"用户输入验证码"| E
-    subgraph S3["③ 你的后端"]
-        E["verify_code() 校验"] --> F{"通过 ?"}
-        F -->|"是"| G["登录成功 ✓"]
-        F -->|"否"| H["拒绝 ✗"]
+```
+
+**使用流程（每次登录验证）：**
+
+```mermaid
+flowchart TB
+    subgraph S1["微信小程序：Mina令牌（用户手机）"]
+        A["本地计算 6 位动态码"] --> B["显示验证码"]
+    end
+    B -->|"用户输入验证码"| C
+    subgraph S2["你的后端"]
+        C["verify_code() 校验"] --> D{"通过 ?"}
+        D -->|"是"| E["登录成功 ✓"]
+        D -->|"否"| F["拒绝 ✗"]
     end
 ```
 
