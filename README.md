@@ -20,10 +20,6 @@ English · [简体中文](./README.zh-CN.md)
 
 **minitotp** is a standard TOTP two-factor authentication SDK for **web service developers**: generate secrets, build otpauth QR codes, and verify 6-digit dynamic codes in your sign-up/login system. Multi-language implementations, with algorithms fully aligned to the official RFC test vectors.
 
-A companion **WeChat Mini Program: Mina令牌** (a standard TOTP authenticator) is provided by the operator (closed source). After integrating minitotp, you can guide users to use this Mini Program; users are also free to use any standard TOTP authenticator (Microsoft Authenticator / Authy / Google Authenticator).
-
-![Mina令牌 Mini Program QR](docs/mina-miniprogram-qr.png)
-
 **The smarter replacement for SMS verification codes.** Instead of paying for and waiting on SMS OTP, minitotp generates the same 6-digit code **locally on the user's device** — no SMS gateway, works offline, and is safer:
 
 | SMS verification code | minitotp (TOTP) |
@@ -32,6 +28,10 @@ A companion **WeChat Mini Program: Mina令牌** (a standard TOTP authenticator) 
 | ❌ 依赖运营商/信号/网络，有延迟 | ✅ **离线可用**，30s 即时出码 |
 | ❌ 可被 SIM 卡劫持 / 短信拦截 | ✅ **不经过短信通道**，更安全 |
 | ❌ 需要收集手机号 | ✅ **无需手机号**，保护隐私 |
+
+A companion **WeChat Mini Program: Mina令牌** (a standard TOTP authenticator) is provided by the operator (closed source). After integrating minitotp, you can guide users to use this Mini Program; users are also free to use any standard TOTP authenticator (Microsoft Authenticator / Authy / Google Authenticator).
+
+![Mina令牌 Mini Program QR](docs/mina-miniprogram-qr.png)
 
 ## 🚀 Live Demo
 
