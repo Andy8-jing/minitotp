@@ -94,6 +94,23 @@ ok = verify_code(input_code, secret, 1)                        # verify the 6-di
 
 A self-contained flow covering **backend → authenticator/front-end → backend**. Copy it, `pip install minitotp`, and run:
 
+```mermaid
+flowchart TB
+    subgraph S1["① Your backend"]
+        A["generate_secret() create secret"] --> B["build_otpauth_uri() build otpauth URI"]
+    end
+    B -->|"QR code (otpauth://)"| C
+    subgraph S2["② WeChat Mini Program: Mina令牌 (authenticator)"]
+        C["Scan QR → save secret"] --> D["calc_totp() compute 6-digit code locally"]
+    end
+    D -->|"user submits code"| E
+    subgraph S3["③ Your backend"]
+        E["verify_code() verify"] --> F{"valid ?"}
+        F -->|"yes"| G["Login OK ✓"]
+        F -->|"no"| H["Rejected ✗"]
+    end
+```
+
 ```python
 from minitotp import generate_secret, build_otpauth_uri, verify_code
 
