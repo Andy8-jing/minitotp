@@ -111,8 +111,6 @@ print("后端校验:", "通过 ✓" if verify_code(code, secret) else "失败 �
 
 ## 安全声明
 
-> ⚠️ TOTP 存在钓鱼风险：仿站拿到 30s 内的 6 位验证码即可登录。
-> 本项目**不是防钓鱼方案**，不能替代 FIDO2 / WebAuthn(Passkey)。高安全场景请使用 FIDO2。
 > secret 是凭证根，业务方必须加密存储。
 
 ## 测试向量（RFC6238）

@@ -111,8 +111,6 @@ print("Backend verify:", "PASS" if verify_code(code, secret) else "FAIL")
 
 ## Security notice
 
-> ⚠️ TOTP is vulnerable to phishing: an attacker can log in with a 6-digit code captured within 30 seconds.
-> This project is **not an anti-phishing solution** and cannot replace FIDO2 / WebAuthn (Passkey). Use FIDO2 for high-security scenarios.
 > The secret is the root of the credential — the business party must store it encrypted.
 
 ## Test vectors (RFC6238)
