@@ -95,18 +95,21 @@ ok = verify_code(input_code, secret, 1)                        # verify the 6-di
 A self-contained flow covering **backend → authenticator/front-end → backend**. Copy it, `pip install minitotp`, and run:
 
 ```python
-from minitotp import generate_secret, build_otpauth_uri, calc_totp, verify_code
+from minitotp import generate_secret, build_otpauth_uri, verify_code
 
-# ① Backend: enable 2FA for a user → secret + otpauth URI (turn the URI into a QR for them to scan)
+# ① Backend (your server): enable 2FA → secret + otpauth URI (turn into a QR for the user to scan)
 secret = generate_secret()
 uri = build_otpauth_uri("MySite", "user@example.com", secret)
-print("Binding URI:", uri)
+print("Binding URI:", uri)   # this is what the user scans with an authenticator (e.g. Mina令牌 Mini Program)
 
-# ② Authenticator / front-end: after the user scans & binds, compute the current 6-digit code
+# ② The authenticator (Mini Program / App) computes the 6-digit code — NOT your backend.
+#    In production the backend never runs calc_totp; it's shown below only to illustrate
+#    the code the user sees inside the authenticator.
+from minitotp import calc_totp
 code = calc_totp(secret)
 print("Authenticator shows:", code)
 
-# ③ Backend: verify the code the user submits at login
+# ③ Backend (your server): verify the code the user submits at login
 print("Backend verify:", "PASS" if verify_code(code, secret) else "FAIL")
 ```
 

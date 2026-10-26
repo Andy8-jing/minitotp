@@ -95,18 +95,20 @@ ok = verify_code(input_code, secret, 1)                        # 校验 6 位验
 一个覆盖 **后端 → 验证器/前端 → 后端** 全链路的自包含流程。复制保存为 `demo.py`，`pip install minitotp` 后直接运行：
 
 ```python
-from minitotp import generate_secret, build_otpauth_uri, calc_totp, verify_code
+from minitotp import generate_secret, build_otpauth_uri, verify_code
 
-# ① 后端：为用户开启 2FA → 生成密钥 + otpauth URI（把 URI 转成二维码给用户扫）
+# ① 后端（你的服务器）：为用户开启 2FA → 生成密钥 + otpauth URI（把 URI 转成二维码给用户扫）
 secret = generate_secret()
 uri = build_otpauth_uri("MySite", "user@example.com", secret)
-print("绑定 URI:", uri)
+print("绑定 URI:", uri)   # 用户用验证器（如 微信小程序：Mina令牌）扫描这个 URI 绑定
 
-# ② 验证器 / 前端：用户扫码绑定后，用同一 secret 计算当前 6 位动态码
+# ② 验证器（小程序 / App）负责计算 6 位动态码——**不是你的后端**。
+#    生产中后端绝不运行 calc_totp；下面这行仅示意"用户在小程序里看到的验证码"。
+from minitotp import calc_totp
 code = calc_totp(secret)
 print("验证器显示:", code)
 
-# ③ 后端：登录时校验用户提交的 6 位码
+# ③ 后端（你的服务器）：登录时校验用户提交的 6 位码
 print("后端校验:", "通过 ✓" if verify_code(code, secret) else "失败 ✗")
 ```
 
