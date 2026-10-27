@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "minitotp"
-version = "0.1.0"
+version = "0.1.1"
 description = "Standard TOTP (RFC6238) two-factor authentication SDK, pure standard library"
 requires-python = ">=3.7"
 license = { text = "MIT" }

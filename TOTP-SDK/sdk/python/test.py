@@ -27,4 +27,11 @@ assert not verify_code("000000", SECRET_B32, 1, 30, 6, 100)
 raw = b"12345678901234567890"
 assert b32decode(b32encode(raw)) == raw
 
+# 二维码 SVG（回归：0.1.0 的 generate_qr_svg 用 PIL 工厂输出 SVG 会 KeyError）
+from minitotp import build_otpauth_uri, generate_qr_svg
+uri = build_otpauth_uri("minitotp", "demo", SECRET_B32)
+svg = generate_qr_svg(uri)
+assert isinstance(svg, str) and "<svg" in svg, "generate_qr_svg 应返回合法 SVG"
+print("PASS generate_qr_svg ->", len(svg), "bytes")
+
 print("\n✅ 全部 RFC6238 测试通过")

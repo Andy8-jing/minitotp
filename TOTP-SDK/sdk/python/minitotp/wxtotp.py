@@ -23,17 +23,24 @@ def build_otpauth_uri(issuer, account, secret, period=30, digits=6):
 
 
 def generate_qr_svg(uri):
-    """生成二维码 SVG 文本（可选依赖 qrcode 库）。"""
+    """生成二维码 SVG 文本（可选依赖 qrcode 库）。
+
+    显式使用 qrcode 的 SVG 路径工厂（``qrcode.image.svg.SvgPathImage``）。
+    不要用 ``qrcode.make(uri)`` 的默认工厂：当 PIL 已安装时默认工厂是
+    ``PilImage``，其 ``save(format="SVG")`` 会抛 ``KeyError: 'SVG'``
+    （PIL 不支持输出 SVG）—— 这是 0.1.0 的已知缺陷，已在 0.1.1 修复。
+    """
     try:
         import qrcode
+        import qrcode.image.svg
         from io import BytesIO
     except ImportError:
         raise RuntimeError(
             "可选依赖 qrcode 未安装。请先 pip install qrcode[pil]，或用标准库版本跳过二维码。"
         )
-    img = qrcode.make(uri)
+    img = qrcode.make(uri, image_factory=qrcode.image.svg.SvgPathImage)
     buf = BytesIO()
-    img.save(buf, format="SVG")
+    img.save(buf)
     return buf.getvalue().decode("utf-8")
 
 
